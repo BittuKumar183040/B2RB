@@ -12,8 +12,8 @@ const Header = ({ title }) => {
 
 const Builder = forwardRef(({ header, experiences, projects, skills, education, certifications }, ref) => {
   return (
-    <div ref={ref} className="resume-page border border-gray-300 rounded-sm aspect-[1/1.414] pl-8 pt-8 pr-8 pb-4 flex flex-col shrink-0 w-198.5 h-280.75">
-      <section className='flex flex-col items-center gap-2'>
+    <div ref={ref} className="resume-page border border-gray-300 rounded-sm aspect-[1/1.414] pl-6 pr-6 pt-4 pb-4 flex flex-col shrink-0 w-198.5 h-280.75">
+      <section className='flex flex-col items-center gap-px'>
         <h1 className={header.fullname.className}>
           {header.fullname.value}
         </h1>
@@ -64,7 +64,7 @@ const Builder = forwardRef(({ header, experiences, projects, skills, education, 
                 </p>
               </div>
 
-              <ol className={`list-disc pl-5 space-y-1 text-sm ml-4 ${experience.description.className}`}>
+              <ol className={`list-disc pl-5 space-y-px text-sm ml-1 ${experience.description.className}`}>
                 {experience.description.value}
               </ol>
             </div>
@@ -109,7 +109,7 @@ const Builder = forwardRef(({ header, experiences, projects, skills, education, 
         {skills.length > 0 && (
           <Header title={"TECHNICAL SKILLS"} />
         )}
-        <div className="space-y-1 ml-3">
+        <div className="space-y-px ml-3">
           {skills.map((skill, index) => {
             const items = skill.items.value.join(", ")
             return (
