@@ -1,6 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:ital,wght@0,400..700;1,400..700&display=swap');
 @import "tailwindcss";
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #c0c0c0 transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #000000;
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #000000;
+}
+
 @media print {
 
   body * {

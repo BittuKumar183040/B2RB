@@ -12,7 +12,7 @@ import Certification from '../userInput/Certification';
 import { certificationsData, educationData, experiencesData, headerData, projectsData, skillsData } from '../data/ResumeData';
 import SettingsToolbar from '../components/SettingsToolbar';
 import { FONTS } from '../data/fonts';
-
+import { Menu, TextAlignStart } from 'lucide-react';
 
 function Resume () {
   const [sidePanelCollapse, setSidePanelCollapse] = useState(false);
@@ -51,13 +51,13 @@ function Resume () {
 
   return (
     <div className=' flex flex-col h-dvh w-full'>
-      <div className=' relative flex-1 flex justify-between overflow-auto'>
+      <div className={` relative flex-1 flex justify-between  ${sidePanelCollapse ? "" : "overflow-auto"}`}>
         <div className={` resume-sidebar relative shrink-0 space-y-2 shadow overflow-y-auto overflow-x-hidden transition-all 
           ${sidePanelCollapse ? "w-8 p-0" : " xl:w-110 md:w-82 w-60 p-4"}`}>
 
           <div className='flex items-center justify-between border-b-2 border-gray-300'>
             {!sidePanelCollapse && <img src="/logo.png" alt="Logo" className='h-6' />}
-            <button className=' p-2 cursor-pointer' onClick={() => setSidePanelCollapse(!sidePanelCollapse)}> <MenuOutlined /></button>
+            <button className=' p-2 cursor-pointer ' onClick={() => setSidePanelCollapse(!sidePanelCollapse)}> {sidePanelCollapse ? <TextAlignStart size={18} /> : <Menu size={18} /> }</button>
           </div>
 
           <div className={` ${sidePanelCollapse && "w-0 opacity-0"} transition-all`}>
@@ -70,8 +70,9 @@ function Resume () {
           </div>
 
         </div>
+
         <div style={{ zoom: settings.zoom.value }} className={`resume-divider flex items-start ${settings.previewType.find((o) => o.selected)?.value === "webpage" ? "" : " xl:justify-center"} w-full relative overflow-auto shadow-inner transition-all`}>
-          <Builder 
+          <Builder
             header={header} 
             experiences={experiences} 
             projects={projects} 

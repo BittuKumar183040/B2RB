@@ -105,7 +105,6 @@ const Templates = () => {
         <div className="absolute bottom-20 right-1/4 w-80 h-80 bg-teal-100 rounded-full blur-3xl opacity-30 pointer-events-none" />
 
         <div className="relative z-10 max-w-6xl mx-auto">
-          {/* Page Header */}
           <div className="text-center mb-12">
             {/* <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-4 bg-emerald-50 border border-emerald-200 rounded-full">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
