@@ -76,8 +76,18 @@ import "@fontsource/fira-code/400.css";
 import "@fontsource/fira-code/500.css";
 
 export const FONTS = [
+  // Serif
+  { label: "Ibarra Real Nova Variable", value: "Ibarra Real Nova Variable", category: "Serif", selected: true },
+  { label: "Ibarra Real Nova", value: "Ibarra Real Nova" ,      category: "Serif" },
+  { label: "Merriweather",    value: "Merriweather",      category: "Serif" },
+  { label: "Playfair",        value: "Playfair Display",  category: "Serif" },
+  { label: "Source Serif",    value: "Source Serif 4",    category: "Serif" },
+  { label: "EB Garamond",     value: "EB Garamond",       category: "Serif" },
+  { label: "Crimson Text",    value: "Crimson Text",      category: "Serif" },
+  { label: "Libre Baskerville", value: "Libre Baskerville", category: "Serif" },
+  { label: "IBM Plex Serif",  value: "IBM Plex Serif",    category: "Serif" },
   // Sans Serif
-  { label: "Inter",           value: "Inter",             category: "Sans Serif", selected: true },
+  { label: "Inter",           value: "Inter",             category: "Sans Serif" },
   { label: "Roboto",          value: "Roboto",            category: "Sans Serif" },
   { label: "Lato",            value: "Lato",              category: "Sans Serif" },
   { label: "Poppins",         value: "Poppins",           category: "Sans Serif" },
@@ -88,16 +98,6 @@ export const FONTS = [
   { label: "Outfit",          value: "Outfit",            category: "Sans Serif" },
   { label: "Space Grotesk",   value: "Space Grotesk",     category: "Sans Serif" },
   { label: "Josefin Sans",    value: "Josefin Sans",      category: "Sans Serif" },
-  // Serif
-  { label: "Ibarra Real Nova Variable", value: "Ibarra Real Nova Variable", category: "Serif" },
-  { label: "Ibarra Real Nova", value: "Ibarra Real Nova" ,      category: "Serif" },
-  { label: "Merriweather",    value: "Merriweather",      category: "Serif" },
-  { label: "Playfair",        value: "Playfair Display",  category: "Serif" },
-  { label: "Source Serif",    value: "Source Serif 4",    category: "Serif" },
-  { label: "EB Garamond",     value: "EB Garamond",       category: "Serif" },
-  { label: "Crimson Text",    value: "Crimson Text",      category: "Serif" },
-  { label: "Libre Baskerville", value: "Libre Baskerville", category: "Serif" },
-  { label: "IBM Plex Serif",  value: "IBM Plex Serif",    category: "Serif" },
   // Mono
   { label: "JetBrains Mono",  value: "JetBrains Mono",   category: "Mono" },
   { label: "Fira Code",       value: "Fira Code",         category: "Mono" },
