@@ -10,9 +10,15 @@ const Header = ({ title }) => {
   )
 }
 
-const Builder = forwardRef(({ header, experiences, projects, skills, education, certifications }, ref) => {
+const Builder = forwardRef(({ header, experiences, projects, skills, education, certifications, settings }, ref) => {
+  console.log(settings)
+  const selectedPreview = settings.previewType.find((o) => o.selected)?.value ?? "exact";
+  const selectedPageSize = settings.pageSize.find((o) => o.selected)?.value ?? "aspect-[1/1.414] w-198.5 h-280.75";
+
+  const pageClass = selectedPreview === "exact" ? selectedPageSize : "";
+
   return (
-    <div ref={ref} className="resume-page border border-gray-300 rounded-sm aspect-[1/1.414] pl-6 pr-6 pt-4 pb-4 flex flex-col shrink-0 w-198.5 h-280.75">
+    <div ref={ref} className={`resume-page border border-gray-300 rounded-sm pl-6 pr-6 pt-4 pb-4 flex flex-col shrink-0 ${pageClass}`}>
       <section className='flex flex-col items-center gap-px'>
         <h1 className={header.fullname.className}>
           {header.fullname.value}

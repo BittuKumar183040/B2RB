@@ -50,7 +50,7 @@ export const experiencesData = [
     designation: {
       label: "Designation",
       className: "tracking-wide text-sm font-semibold",
-      value: "Software Developer"
+      value: "Full Stack Software Engineer"
     },
     company: {
       label: "Company",
@@ -79,11 +79,11 @@ export const experiencesData = [
         <li key={1}>Architected and delivered a <span className="font-semibold">full-stack microservices simulation platform</span> serving 1,000+ active users and processing 200-500 REST API requests per day, built with React, Spring Boot, FastAPI, AWS S3, and PVC storage.</li>,
         <li key={2}>Engineered a <span className="font-semibold">real-time 2D and 3D visualization engine</span> using WebGL and Three.js, reducing client-side render latency by 35% through bounding-box fitting and camera auto-framing optimizations.</li>,
         <li key={3}>Implemented <span className="font-semibold">JWT-based authentication and role-based access control (RBAC)</span> with bcrypt password hashing, securing multi-tenant user data across all microservices.</li>,
-        <li key={4}>Developed scalable <span className="font-semibold">RESTful APIs</span> across independent microservices using FastAPI and Spring Boot, documented end-to-end with OpenAPI and Swagger UI.</li>,
-        <li key={5}>Built a fully <span className="font-semibold">responsive single-page application (SPA)</span> using React, Redux Toolkit, TypeScript, and Tailwind CSS, improving cross-device usability scores.</li>,
+        <li key={4}>Developed scalable <span className="font-semibold">REST APIs</span> for distributed microservices using FastAPI and Spring Boot</li>,
+        <li key={5}>Built a <span className="font-semibold">responsive single-page application (SPA)</span> for cloud-native microservices platform with scalable UI architecture</li>,
         <li key={6}>Optimized <span className="font-semibold">PostgreSQL database schemas and ORM-based migrations</span>, improving query execution performance by 40% through indexing strategies and efficient data-access patterns.</li>,
-        <li key={7}>Containerized and deployed all microservices using <span className="font-semibold">Docker and Podman on AWS</span>, with hands-on exposure to Kubernetes orchestration and GitOps-based CI/CD pipelines.</li>,
-        <li key={8}>Upheld high code quality through <span className="font-semibold">modular architecture, unit testing, integration testing, and SonarQube</span> static code analysis as part of the Agile development workflow.</li>
+        <li key={7}>Containerized and deployed cloud-native microservices using <span className="font-semibold">Docker and Podman on AWS</span>, with hands-on exposure to Kubernetes orchestration and GitOps-based CI/CD pipelines.</li>,
+        <li key={8}>Maintained high code quality through modular and scalable architecture by applying OOP and SOLID principles, and code review practices.</li>
       ]
     }
   }
@@ -100,12 +100,11 @@ export const projectsData = [
       value: [
         <li key={1}>Designed and developed a <span className="font-semibold">browser-based 2D and 3D model visualization tool</span> using React, WebGL, and Three.js, supporting multiple mesh file formats.</li>,
         <li key={2}>Implemented advanced <span className="font-semibold">scene controls</span> including orbit controls, axis helpers, mesh isolation, and dynamic lighting for interactive model inspection.</li>,
-        <li key={3}>Resolved critical <span className="font-semibold">rendering performance bottlenecks</span> using bounding-box fitting and camera auto-framing, enabling smooth visualization of large-scale models in the browser.</li>
-      ]
+        ]
     }
   },
   {
-    title: { label: "Title", className: "font-semibold", value: "Windoes" },
+    title: { label: "Title", className: "font-semibold", value: "Windows Eleven" },
     technology: { label: "Technology", className: "text-xs italic", value: ["React", "Redux", "Express.js", "Spring Boot", "Microservices", "JWT Authentication", "PostgreSQL"] },
     live: { label: "Live URL", className: "font-medium", value: "https://betoo.co.in" },
     github: { label: "GitHub", className: "font-medium", value: "https://github.com/BittuKumar183040?tab=repositories&q=windoes" },
@@ -119,7 +118,7 @@ export const projectsData = [
         <li key={3}>Implemented <span className="font-semibold">centralized JWT validation at the API Gateway</span> to enforce consistent authorization and eliminate redundant token verification across services.</li>,
         <li key={4}>Integrated <span className="font-semibold">Persistent Volume Claim (PVC)</span> object storage for scalable and portable file storage migration.</li>,
         <li key={5}>Delivered comprehensive <span className="font-semibold">REST API documentation</span> using OpenAPI specification and Swagger UI.</li>,
-        <li key={6}>Improved client-side performance through <span className="font-semibold">browser memory management and Redux state optimizations</span>, reducing unnecessary re-renders and memory leaks.</li>
+        <li key={6}>Improved client-side performance through <span className="font-semibold">browser memory management and Redux state optimizations</span>.</li>
       ]
     }
   }
@@ -171,7 +170,7 @@ export const skillsData = [
     items: {
       label: "Items",
       className: "text-sm",
-      value: ["Microservices Architecture", "REST API Design", "JWT Authentication", "RBAC", "Agile", "Code Review", "System Design"]
+      value: ["Microservices", "Distributed Systems", "REST APIs", "API Gateway", "JWT", "RBAC"]
     }
   }
 ]
@@ -187,18 +186,8 @@ export const educationData = [
 
 export const certificationsData = [
   {
-    title:  { label: "Title",  className: "font-medium", value: "AWS Certified Cloud Practitioner" },
-    year:   { label: "Year",   className: "italic",      value: "2024" },
-    issuer: { label: "Issuer", className: "",            value: "Amazon Web Services (AWS)" }
-  },
-  {
-    title:  { label: "Title",  className: "font-medium", value: "Java Spring Boot Microservices and Spring Cloud" },
-    year:   { label: "Year",   className: "italic",      value: "2023" },
-    issuer: { label: "Issuer", className: "",            value: "Udemy" }
-  },
-  {
-    title:  { label: "Title",  className: "font-medium", value: "React - The Complete Guide (Hooks, Redux, TypeScript)" },
-    year:   { label: "Year",   className: "italic",      value: "2023" },
+    title:  { label: "Title",  className: "font-medium", value: "Full Stack Development Certification" },
+    year:   { label: "Year",   className: "italic",      value: "" },
     issuer: { label: "Issuer", className: "",            value: "Mentorkart" }
   }
 ]
