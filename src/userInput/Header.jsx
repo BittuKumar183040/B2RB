@@ -9,7 +9,7 @@ const InputWithOptions = ({ outerKey, innerItem, setterArrayInnerKeys }) => {
   const [showIconLibrary, setShowIconLibrary] = useState(false)
 
   return (
-    <div className="space-y-1.5 ml-3 mb-3">
+    <div className="space-y-1.5 mx-3 mb-3">
       <label className="block text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
         {innerItem.label}
       </label>
