@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-APP_NAME="B2RB"
-CONTAINER_NAME="B2RB-Container"
+APP_NAME="be2b"
+CONTAINER_NAME="b2rb-container"
 ENV_FILE=".env"
 
 if [ -f "$ENV_FILE" ]; then
