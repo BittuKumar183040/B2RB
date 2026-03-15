@@ -5,17 +5,21 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import GettingStarted from './pages/GettingStarted'
 import Templates from './pages/Templates'
+import Dashboard from './pages/Dashboard'
+import ProtectedRoute from './components/ProtectedRoute'
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/resume" element={<Resume />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/getting-started" element={<GettingStarted />} />
         <Route path="/templates" element={<Templates />} />
+
+        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/getting-started" element={<ProtectedRoute><GettingStarted /></ProtectedRoute>} />
+        <Route path="/resume" element={<ProtectedRoute><Resume /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   )

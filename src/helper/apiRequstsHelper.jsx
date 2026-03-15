@@ -3,6 +3,7 @@ import { getUserFromLocal } from "./localstorageHelper";
 
 const backendAPI = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
+  withCredentials: true,
 });
 
 
@@ -12,6 +13,7 @@ const interceptor = async (config) => {
 };
 
 backendAPI.interceptors.request.use(interceptor);
+
 
 
 export default backendAPI;
