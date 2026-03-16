@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Terms from "./components/Terms";
 import { EyeClosed } from "lucide-react";
 import GoogleButton from "../components/GoogleButton";
+import backendAPI from "../helper/apiRequstsHelper";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -16,9 +17,16 @@ const Signup = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/getting-started");
+    try {
+      console.log(form)
+      const res = await backendAPI.post("/auth/register", form);
+      console.log("User registered:", res.data);
+      navigate("/login");
+    } catch (error) {
+      console.error("Registration failed:", error.response?.data || error.message);
+    }
   };
 
   const passwordStrength = (pwd) => {
@@ -45,12 +53,6 @@ const Signup = () => {
           <div className="bg-white border border-gray-200 rounded-2xl shadow-xl shadow-gray-100 p-8">
 
             <div className="text-center mb-8">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-4 bg-emerald-50 border border-emerald-200 rounded-full">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-xs font-semibold text-emerald-700 tracking-widest uppercase">
-                  Free · No Credit Card
-                </span>
-              </div>
               <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 mb-2">
                 Create your account
               </h1>
@@ -70,7 +72,7 @@ const Signup = () => {
               <div className="flex-1 h-px bg-gray-200" />
             </div>
 
-            <div className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5">
                   Full Name
@@ -80,7 +82,7 @@ const Signup = () => {
                   name="name"
                   value={form.name}
                   onChange={handleChange}
-                  placeholder="John Doe"
+                  placeholder="Enter your full name"
                   className="w-full px-4 py-3 text-sm text-gray-900 bg-gray-50 border border-gray-200 rounded-xl placeholder-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all duration-200"
                 />
               </div>
@@ -179,12 +181,15 @@ const Signup = () => {
               </div>
 
               <button
-                onClick={handleSubmit}
-                className="w-full py-3.5 bg-emerald-600 text-white font-bold text-sm rounded-xl hover:bg-emerald-700 shadow-lg shadow-emerald-200 transition-all duration-200 hover:-translate-y-0.5 mt-2"
-              >
+                type="submit"
+                disabled={ !form.name || !form.email || !form.password || !form.confirm || form.password !== form.confirm}
+                className=" w-full py-3.5 font-bold text-sm rounded-xl mt-2 transition-all duration-200
+                  bg-emerald-600 text-white hover:bg-emerald-700 hover:-translate-y-0.5 shadow-lg shadow-emerald-200
+                  disabled:bg-gray-300 disabled:text-gray-500 disabled:shadow-none disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                >
                 Create Account →
               </button>
-            </div>
+            </form>
           </div>
 
           <Terms />

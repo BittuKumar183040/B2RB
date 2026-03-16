@@ -30,7 +30,8 @@ const Login = () => {
       await login(form.email, form.password);
       navigate("/dashboard");
     } catch (err) {
-      setError(err.message || "Invalid email or password");
+      console.log(err.response?.data?.message || err.message);
+      setError(err.response?.data?.message || "Invalid email or password");
     } finally {
       setLoading(false);
     }
@@ -47,7 +48,7 @@ const Login = () => {
           <div className=" flex items-center mb-4 justify-center h-20">
             <img src="/logo.png" className=" object-cover h-full" />
           </div>
-          
+
           <div className="bg-white border border-gray-200 rounded-2xl shadow-xl shadow-gray-100 p-8">
             <div className="text-center mb-8">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-4 bg-emerald-50 border border-emerald-200 rounded-full">
@@ -128,15 +129,18 @@ const Login = () => {
               </div>
 
               <button
+                type="submit"
                 onClick={handleSubmit}
-                disabled={loading}
-                className="w-full py-3.5 bg-emerald-600 text-white font-bold text-sm rounded-xl hover:bg-emerald-700 shadow-lg shadow-emerald-200 transition-all duration-200 hover:-translate-y-0.5 mt-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0 flex items-center justify-center gap-2"
+                disabled={loading || !form.email || !form.password}
+                className=" w-full py-3.5 font-bold text-sm rounded-xl mt-2 transition-all duration-200
+                  bg-emerald-600 text-white hover:bg-emerald-700 hover:-translate-y-0.5 shadow-lg shadow-emerald-200
+                  disabled:bg-gray-300 disabled:text-gray-500 disabled:shadow-none disabled:cursor-not-allowed disabled:hover:translate-y-0"
               >
                 {loading ? (
-                  <>
+                  <div className=" flex items-center justify-center gap-4">
                     <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
                     Logging in…
-                  </>
+                  </div>
                 ) : (
                   "Log in →"
                 )}
