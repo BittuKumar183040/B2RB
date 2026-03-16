@@ -4,6 +4,19 @@ import { Link, useNavigate } from 'react-router-dom'
 import { User, LogOut, ChevronDown, LayoutDashboard } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 
+const ProfileImage = ({user}) => {
+  return (<>
+    {user.picture ? (
+      <img src={user.picture} />
+    ) : (
+      <span className="text-xs font-bold text-white">
+        {user.name?.charAt(0).toUpperCase() ?? <User size={14} />}
+      </span>
+    )}
+  </>
+  )
+}
+
 const Navbar = () => {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
@@ -30,7 +43,7 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
 
-        <Link to="/" className="flex items-center gap-2.5">
+        <Link to={`${user ? "/dashboard" : "/"}`} className="flex items-center gap-2.5">
           <img
             src="/logo.png"
             alt="Logo"
@@ -72,11 +85,9 @@ const Navbar = () => {
                     : "border-gray-200 hover:border-emerald-300 hover:bg-emerald-50"
                   }`}
               >
-                
-                <div className="w-7 h-7 rounded-full bg-emerald-600 flex items-center justify-center shrink-0">
-                  <span className="text-xs font-bold text-white">
-                    {user.name?.charAt(0).toUpperCase() ?? <User size={14} />}
-                  </span>
+
+                <div className="w-7 h-7 rounded-full overflow-hidden bg-emerald-600 flex items-center justify-center shrink-0">
+                  <ProfileImage user={user} />
                 </div>
                 <span className="text-sm font-semibold text-gray-800 max-w-25 truncate hidden sm:block">
                   {user.name}
@@ -91,10 +102,8 @@ const Navbar = () => {
                 <div className="absolute right-0 top-full mt-2 w-60 bg-white border border-gray-200 rounded-2xl shadow-xl shadow-gray-100 overflow-hidden z-50">
                   <div className="px-4 py-3 border-b border-gray-100 bg-slate-50">
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-full bg-emerald-600 flex items-center justify-center shrink-0">
-                        <span className="text-sm font-bold text-white">
-                          {user.name?.charAt(0).toUpperCase()}
-                        </span>
+                      <div className="w-9 h-9 rounded-full overflow-hidden bg-emerald-600 flex items-center justify-center shrink-0">
+                        <ProfileImage user={user} />
                       </div>
                       <div className="min-w-0">
                         <p className="text-sm font-bold text-gray-900 truncate">
@@ -115,15 +124,6 @@ const Navbar = () => {
                     >
                       <LayoutDashboard size={15} className="text-emerald-500" />
                       Dashboard
-                    </Link>
-
-                    <Link
-                      to="/resume"
-                      onClick={() => setDropdownOpen(false)}
-                      className="flex items-center gap-2.5 px-3 py-2.5 text-sm font-medium text-gray-700 rounded-xl hover:bg-emerald-50 hover:text-emerald-700 transition-colors"
-                    >
-                      <User size={15} className="text-emerald-500" />
-                      My Resumes
                     </Link>
                   </div>
 

@@ -75,7 +75,7 @@ const Dashboard = () => {
             </p>
           </div>
           <button
-            onClick={() => navigate("/resume")}
+            onClick={() => navigate("/templates")}
             className="flex items-center gap-2 px-5 py-3 bg-emerald-600 text-white text-sm font-bold rounded-xl hover:bg-emerald-700 shadow-lg shadow-emerald-200 transition-all duration-200 hover:-translate-y-0.5 whitespace-nowrap"
           >
             <Plus size={16} strokeWidth={2.5} />

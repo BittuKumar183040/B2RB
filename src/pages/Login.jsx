@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import GoogleButton from "../components/GoogleButton";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -61,7 +62,7 @@ const Login = () => {
               <p className="text-sm text-gray-500">
                 Don't have an account?{" "}
                 <Link to="/signup" className="text-emerald-600 font-semibold hover:underline">
-                  Sign up free
+                  Sign up
                 </Link>
               </p>
             </div>
@@ -74,6 +75,7 @@ const Login = () => {
                 {error}
               </div>
             )}
+            <GoogleButton />
 
             <div className="space-y-4">
               <div>

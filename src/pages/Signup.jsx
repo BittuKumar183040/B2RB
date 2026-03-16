@@ -48,7 +48,7 @@ const Signup = () => {
               <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-4 bg-emerald-50 border border-emerald-200 rounded-full">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 <span className="text-xs font-semibold text-emerald-700 tracking-widest uppercase">
-                  Free Forever · No Credit Card
+                  Free · No Credit Card
                 </span>
               </div>
               <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 mb-2">
