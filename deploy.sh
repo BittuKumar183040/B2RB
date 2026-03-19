@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR" || exit 1
+
 APP_NAME="b2rb-frontend"
 CONTAINER_NAME="b2rb-frontend-container"
 ENV_FILE=".env"
