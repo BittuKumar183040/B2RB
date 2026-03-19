@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from 'react'
 import { GithubFilled } from '@ant-design/icons'
 import { Link, useNavigate } from 'react-router-dom'
-import { User, LogOut, ChevronDown, LayoutDashboard } from 'lucide-react'
+import { User, LogOut, ChevronDown, LayoutDashboard, UserPlus } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
+import Button from '../../components/Button'
 
-const ProfileImage = ({user}) => {
+const ProfileImage = ({ user }) => {
   return (<>
     {user.picture ? (
       <img src={user.picture} />
@@ -66,13 +67,12 @@ const Navbar = () => {
             GitHub
           </a>
 
-          {!user && (
-            <Link
-              to="/signup"
-              className="px-4 py-2 text-sm font-semibold text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 transition-all duration-200 shadow-sm"
-            >
-              Sign Up →
-            </Link>
+          {!user && (<>
+            <div className="flex items-center gap-3">
+              <Button isLink Logo={<User size={14} />} color="primary" label="Login" link="/login" />
+              <Button isLink Logo={<UserPlus size={14} />} color="secondary" label="Sign Up" link="/signup" />
+            </div>
+          </>
           )}
 
           {user && (

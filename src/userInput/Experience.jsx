@@ -66,46 +66,170 @@ const Experience = ({ experiences, setExperiences }) => {
     )
   }
 
-  const updateDescription = (expIndex, descIndex, html) => {
+  const updateDescription = (expIndex, sectionIndex, liIndex, html) => {
     setExperiences(prev =>
       prev.map((exp, i) => {
         if (i !== expIndex) return exp
-        const newList = exp.description.value.map((li, j) =>
-          j === descIndex
-            ? <li key={j} dangerouslySetInnerHTML={{ __html: html }} />
-            : li
-        )
-        return { ...exp, description: { ...exp.description, value: newList } }
+
+        const updatedSections = exp.description.value.map((section, sIdx) => {
+          if (sIdx !== sectionIndex) return section
+
+          const newBullets = section.value.map((li, bIdx) =>
+            bIdx === liIndex
+              ? <li key={bIdx} dangerouslySetInnerHTML={{ __html: html }} />
+              : li
+          )
+
+          return { ...section, value: newBullets }
+        })
+
+        return {
+          ...exp,
+          description: { ...exp.description, value: updatedSections }
+        }
       })
     )
   }
 
-  const addDescription = (expIndex) => {
+  const addDescription = (expIndex, sectionIndex) => {
     setExperiences(prev =>
       prev.map((exp, i) => {
         if (i !== expIndex) return exp
+
+        const updatedSections = exp.description.value.map((section, sIdx) => {
+          if (sIdx !== sectionIndex) return section
+
+          return {
+            ...section,
+            value: [
+              ...section.value,
+              <li key={Date.now()}></li>
+            ]
+          }
+        })
+
+        return {
+          ...exp,
+          description: { ...exp.description, value: updatedSections }
+        }
+      })
+    )
+  }
+
+  const removeDescription = (expIndex, sectionIndex, liIndex) => {
+    setExperiences(prev =>
+      prev.map((exp, i) => {
+        if (i !== expIndex) return exp
+
+        const updatedSections = exp.description.value.map((section, sIdx) => {
+          if (sIdx !== sectionIndex) return section
+
+          let newBullets = section.value
+            .filter((_, bIdx) => bIdx !== liIndex)
+            .map((li, idx) => {
+              const html = getHTML(li)
+              return <li key={idx} dangerouslySetInnerHTML={{ __html: html }} />
+            })
+
+          // ✅ ensure at least one bullet exists
+          if (newBullets.length === 0) {
+            newBullets = [<li key={Date.now()}></li>]
+          }
+
+          return { ...section, value: newBullets }
+        })
+
+        return {
+          ...exp,
+          description: { ...exp.description, value: updatedSections }
+        }
+      })
+    )
+  }
+
+  const updateSectionLabel = (expIndex, sectionIndex, value) => {
+    setExperiences(prev =>
+      prev.map((exp, i) => {
+        if (i !== expIndex) return exp
+
+        const updatedSections = exp.description.value.map((section, sIdx) =>
+          sIdx === sectionIndex ? { ...section, label: value } : section
+        )
+
+        return {
+          ...exp,
+          description: { ...exp.description, value: updatedSections }
+        }
+      })
+    )
+  }
+
+  const updateSubLabel = (expIndex, sectionIndex, values) => {
+    setExperiences(prev =>
+      prev.map((exp, i) => {
+        if (i !== expIndex) return exp
+
+        const updatedSections = exp.description.value.map((section, sIdx) => {
+          if (sIdx !== sectionIndex) return section
+
+          return {
+            ...section,
+            sublabel: {
+              ...section.sublabel,
+              value: values.map(v => v.trim()).filter(Boolean)
+            }
+          }
+        })
+
+        return {
+          ...exp,
+          description: { ...exp.description, value: updatedSections }
+        }
+      })
+    )
+  }
+
+  const addSection = (expIndex) => {
+    setExperiences(prev =>
+      prev.map((exp, i) => {
+        if (i !== expIndex) return exp
+
+        const newSection = {
+          label: "New Section",
+          className: "",
+          sublabel: {
+            label: "Tech Stack",
+            className: "",
+            value: []
+          },
+          value: [<li key={Date.now()}></li>]
+        }
+
         return {
           ...exp,
           description: {
             ...exp.description,
-            value: [...exp.description.value, <li key={Date.now()}></li>]
+            value: [...exp.description.value, newSection]
           }
         }
       })
     )
   }
 
-  const removeDescription = (expIndex, descIndex) => {
+  const removeSection = (expIndex, sectionIndex) => {
     setExperiences(prev =>
       prev.map((exp, i) => {
         if (i !== expIndex) return exp
-        const newList = exp.description.value
-          .filter((_, j) => j !== descIndex)
-          .map((li, idx) => {
-            const html = getHTML(li)
-            return <li key={idx} dangerouslySetInnerHTML={{ __html: html }} />
-          })
-        return { ...exp, description: { ...exp.description, value: newList } }
+
+        const updatedSections = exp.description.value.filter((_, sIdx) => sIdx !== sectionIndex)
+
+        return {
+          ...exp,
+          description: {
+            ...exp.description,
+            value: updatedSections.length > 0 ? updatedSections : exp.description.value
+          }
+        }
       })
     )
   }
@@ -113,11 +237,24 @@ const Experience = ({ experiences, setExperiences }) => {
   const addExperience = () => {
     const template = {
       designation: { label: "Designation", className: "tracking-wide text-sm font-semibold", value: "" },
-      company:     { label: "Company",     className: "text-xs font-medium",                 value: "" },
-      duration:    { label: "Duration",    className: "italic text-sm",                      value: { start: "", end: "" } },
-      mode:        { label: "Mode",        className: "italic text-xs",                      value: "" },
-      location:    { label: "Location",    className: "italic text-xs",                      value: "" },
-      description: { label: "Description", className: "list-disc pl-5 space-y-1 text-sm ml-4", value: [<li key={Date.now()}></li>] }
+      company: { label: "Company", className: "text-xs font-medium", value: "" },
+      duration: { label: "Duration", className: "italic text-sm", value: { start: "", end: "" } },
+      mode: { label: "Mode", className: "italic text-xs", value: "" },
+      location: { label: "Location", className: "italic text-xs", value: "" },
+      description: {
+        label: "Description", className: "list-disc pl-5 space-y-1 text-sm ml-4", value: [
+          {
+            label: "New Section",
+            className: "",
+            sublabel: {
+              label: "Tech Stack",
+              className: "",
+              value: []
+            },
+            value: [<li key={Date.now()}></li>]
+          }
+        ]
+      }
     }
     setExperiences(prev => [...prev, template])
     setCollapsedExperiences(prev => ({ ...prev, [experiences.length]: false }))
@@ -191,9 +328,8 @@ const Experience = ({ experiences, setExperiences }) => {
               {!isCollapsed && (
                 <div className="px-3 pb-3 pt-1 space-y-3 border-t border-slate-100">
                   {Object.entries(experience).map(([key, item]) => {
-
                     if (key === "description") {
-                      const bulletCount = item.value.length
+                      const sectionCount = item.value.length
                       return (
                         <div key={key} className="space-y-2">
                           <div
@@ -206,45 +342,84 @@ const Experience = ({ experiences, setExperiences }) => {
                                 {item.label}
                               </span>
                               <span className="text-[10px] text-slate-400 bg-white border border-slate-200 px-1.5 rounded-full">
-                                {bulletCount}
+                                {sectionCount}
                               </span>
                             </div>
-                            {isDescCollapsed
-                              ? <ChevronRight size={12} className="text-slate-400" />
-                              : <ChevronDown size={12} className="text-slate-400" />}
-                          </div>
 
+                            {isDescCollapsed ? <ChevronRight size={12} className="text-slate-400" /> : <ChevronDown size={12} className="text-slate-400" />}
+                          </div>
                           {!isDescCollapsed && (
-                            <div className="space-y-2">
-                              {item.value.map((li, liIndex) => (
-                                <div key={liIndex} className="flex gap-2 items-start">
-                                  <span className="text-slate-300 mt-2.5 text-xs select-none">•</span>
-                                  <EditableBullet
-                                    html={getHTML(li)}
-                                    onChange={(html) => updateDescription(index, liIndex, html)}
-                                    onEnter={() => addDescription(index)}
-                                  />
-                                  <button
-                                    disabled={item.value.length === 1}
-                                    onClick={() => removeDescription(index, liIndex)}
-                                    className="text-slate-300 hover:text-red-400 transition-colors disabled:opacity-30 mt-2 shrink-0"
-                                  >
-                                    <X size={13} />
-                                  </button>
-                                </div>
-                              ))}
+                            <div className="space-y-4">
+                              {item.value.map((section, sectionIndex) => {
+                                return (
+                                  <div key={sectionIndex} className="border border-slate-200 rounded-lg p-2.5 bg-slate-50/50 space-y-2">
+                                    <div className="flex items-center gap-1.5">
+                                      <input
+                                        value={section.label}
+                                        onChange={(e) => updateSectionLabel(index, sectionIndex, e.target.value)}
+                                        className="flex-1 text-xs font-semibold bg-white border border-slate-200 rounded-md px-2 py-1.5 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all"
+                                      />
+                                      <button
+                                        onClick={() => removeSection(index, sectionIndex)}
+                                        disabled={item.value.length === 1}
+                                        title="Remove section"
+                                        className="text-slate-300 hover:text-red-400 transition-colors disabled:opacity-30 disabled:cursor-not-allowed shrink-0"
+                                      >
+                                        <X size={13} />
+                                      </button>
+                                    </div>
+                                    {section.sublabel && (
+                                      <input
+                                        value={section.sublabel.value.join(", ")}
+                                        onChange={(e) => updateSubLabel(index, sectionIndex, e.target.value.split(","))}
+                                        placeholder="Tech stack (comma separated)…"
+                                        className="w-full text-[11px] text-slate-500 bg-white border border-slate-200 rounded-md px-2 py-1.5 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all"
+                                      />
+                                    )}
+                                    <div className="space-y-2">
+                                      {section.value.map((li, liIndex) => (
+                                        <div key={liIndex} className="flex gap-2 items-start">
+                                          <span className="text-slate-400 mt-2.5 text-xs select-none">•</span>
+                                          <EditableBullet
+                                            html={getHTML(li)}
+                                            onChange={(html) =>
+                                              updateDescription(index, sectionIndex, liIndex, html)
+                                            }
+                                            onEnter={() => addDescription(index, sectionIndex)}
+                                          />
+                                          <button
+                                            onClick={() =>
+                                              removeDescription(index, sectionIndex, liIndex)
+                                            }
+                                            className="text-slate-300 hover:text-red-400 transition-colors disabled:opacity-30 mt-2 shrink-0"
+                                          >
+                                            <X size={13} />
+                                          </button>
+                                        </div>
+                                      ))}
+                                      <button
+                                        onClick={() => addDescription(index, sectionIndex)}
+                                        className="flex items-center gap-1.5 text-xs font-medium text-emerald-600 hover:text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-2.5 py-1 rounded-lg transition-colors"
+                                      >
+                                        <Plus size={12} /> Add bullet
+                                      </button>
+                                    </div>
+
+                                  </div>
+                                )
+                              })}
                               <button
-                                onClick={() => addDescription(index)}
-                                className="flex items-center gap-1.5 text-xs font-medium text-emerald-600 hover:text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-2.5 py-1 rounded-lg transition-colors"
+                                onClick={() => addSection(index)}
+                                className="flex items-center gap-1.5 text-xs font-medium text-blue-600 hover:text-blue-700 bg-blue-50 hover:bg-blue-100 px-2.5 py-1 rounded-lg transition-colors"
                               >
-                                <Plus size={12} /> Add bullet
+                                <Plus size={12} /> Add section
                               </button>
+
                             </div>
                           )}
                         </div>
                       )
                     }
-
                     if (key === "duration") {
                       return (
                         <div key={key} className="space-y-1">
@@ -256,19 +431,18 @@ const Experience = ({ experiences, setExperiences }) => {
                               value={item.value.start}
                               placeholder="Start"
                               onChange={(e) => setDuration(index, "start", e.target.value)}
-                              className="border border-slate-200 rounded-lg w-full px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all placeholder:text-slate-300"
+                              className="input"
                             />
                             <input
                               value={item.value.end}
                               placeholder="End"
                               onChange={(e) => setDuration(index, "end", e.target.value)}
-                              className="border border-slate-200 rounded-lg w-full px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all placeholder:text-slate-300"
+                              className="input"
                             />
                           </div>
                         </div>
                       )
                     }
-
                     return (
                       <div key={key} className="space-y-1">
                         <label className="block text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
@@ -278,7 +452,7 @@ const Experience = ({ experiences, setExperiences }) => {
                           value={item.value}
                           onChange={(e) => setterOuterKeys(index, key, e.target.value)}
                           placeholder={`Enter ${item.label.toLowerCase()}…`}
-                          className="border border-slate-200 rounded-lg w-full px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all placeholder:text-slate-300"
+                          className="input"
                         />
                       </div>
                     )

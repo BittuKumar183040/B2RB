@@ -1,7 +1,8 @@
 import Seperator from '../components/Seperator';
 import { forwardRef } from 'react';
+import Header from './components/Header';
 
-const Header = ({ title }) => {
+const HeaderTitle = ({ title }) => {
   return (
     <header className="mt-2">
       <h1 className="text-sm font-semibold tracking-wide">{title}</h1>
@@ -11,82 +12,59 @@ const Header = ({ title }) => {
 }
 
 const Builder = forwardRef(({ header, experiences, projects, skills, education, certifications, settings }, ref) => {
-  const selectedPreview  = settings.previewType.find((o) => o.selected)?.value ?? "exact";
+  const selectedPreview = settings.previewType.find((o) => o.selected)?.value ?? "exact";
   const selectedPageSize = settings.pageSize.find((o) => o.selected)?.value ?? "aspect-[1/1.414] w-198.5 h-280.75";
-  const selectedFont     = settings.font.find((o) => o.selected)?.value ?? "font-sans";
-  const zoom             = settings.zoom.value ?? 1;
+  const selectedFont = settings.font.find((o) => o.selected)?.value ?? "font-sans";
+  const zoom = settings.zoom.value ?? 1;
 
   const pageClass = selectedPreview === "exact" ? selectedPageSize : "w-full";
 
   return (
     <div
-      style={{ transform: `scale(${zoom})`, fontFamily: `'${selectedFont}', sans-serif`, transformOrigin: "top left"}}
+      style={{ transform: `scale(${zoom})`, fontFamily: `'${selectedFont}', sans-serif`, transformOrigin: "top left" }}
       className={`resume-page border border-gray-300 rounded-sm pl-6 pr-6 pt-4 pb-4 flex flex-col shrink-0
         ${pageClass}`}
       ref={ref}
     >
-      <section className='flex flex-col items-center gap-px'>
-        <h1 className={header.fullname.className}>
-          {header.fullname.value}
-        </h1>
 
-        <div className="flex gap-4 text-sm">
-          <p className={header.contacts.className}>{header.contacts.value}</p>
-          <div className={header.links.className}>
-            {header.links.items.map((item) => (
-              <div key={item.label} className={item.className}>
-                <item.icon />
-                {
-                  item.url && item.value ? <a className='font-medium' href={item.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {item.value}
-                  </a>
-                    :
-                    <p className="font-medium">{item.value}</p>
+      <Header header={header} />
+
+      {/* EXPERIENCE */}
+      {experiences.length > 0 && <Header title="EXPERIENCE" />}
+      {experiences.map((exp, i) => (
+        <div key={i} className="text-sm">
+          <div className="flex justify-between font-semibold">
+            <span>{exp.company.value}</span>
+            <span>
+              {exp.duration.value.start} - {exp.duration.value.end}
+            </span>
+          </div>
+          <div className="flex justify-between italic">
+            <span>{exp.designation.value}</span>
+            <span>{exp.location.value}</span>
+          </div>
+          <div className="space-y-px">
+            {exp.description.value.map((section, idx) => (<div>
+              <div key={idx} className=' flex items-center gap-2'>
+                <div className=" font-semibold ">
+                  {section.label}
+                </div>
+                {section.sublabel && section.sublabel.value.length > 0 &&
+                  <div className=" italic">
+                    <> - {section.sublabel.value.join(", ")}</>
+                  </div>
                 }
               </div>
-            ))
-            }
+              <ul className={`list-disc ${section.sublabel && section.sublabel.value.length > 0 ? "ml-7" : "ml-6"}`}> {section.value} </ul>
+            </div>
+            ))}
           </div>
         </div>
-      </section>
-
-      <section>
-        {experiences.length > 0 && (
-          <Header title={"EXPERIENCE"} />
-        )}
-        {experiences?.map((experience, index) => {
-          return (
-            <div key={index}>
-              <div className="flex justify-between">
-                <p className={`tracking-wide text-sm font-medium ${experience.designation.className}`}>
-                  {experience.designation.value}
-                </p>
-                <p className={`italic text-sm ${experience.duration.className}`}>
-                  {experience.duration.value.start} - {experience.duration.value.end}
-                </p>
-              </div>
-
-              <div className="flex justify-between">
-                <p className={`text-xs ${experience.company.className}`} > {experience.company.value} </p>
-                <p className={`italic text-xs ${experience.mode.className} ${experience.location.className}`}>
-                  {experience.mode.value}{experience.location.value ? `, ${experience.location.value}` : ""}
-                </p>
-              </div>
-
-              <ol className={`list-disc pl-5 space-y-px text-sm ml-1 ${experience.description.className}`}>
-                {experience.description.value}
-              </ol>
-            </div>
-          )
-        })}
-      </section>
+      ))}
 
       <section>
         {projects.length > 0 && (
-          <Header title={"PROJECTS"} />
+          <HeaderTitle title={"PROJECTS"} />
         )}
         {projects?.map((project, index) => {
           const tech = project.technology.value.join(", ")
@@ -119,7 +97,7 @@ const Builder = forwardRef(({ header, experiences, projects, skills, education, 
 
       <section>
         {skills.length > 0 && (
-          <Header title={"TECHNICAL SKILLS"} />
+          <HeaderTitle title={"TECHNICAL SKILLS"} />
         )}
         <div className="space-y-px ml-3">
           {skills.map((skill, index) => {
@@ -166,7 +144,7 @@ const Builder = forwardRef(({ header, experiences, projects, skills, education, 
 
       <section>
         {certifications.length > 0 && (
-          <Header title={"CERTIFICATIONS / ACHIEVEMENTS"} />
+          <HeaderTitle title={"CERTIFICATIONS / ACHIEVEMENTS"} />
         )}
         <ol className="list-disc pl-5 space-y-1 text-sm mt-2 ml-4">
           {certifications.map((cert, index) => (

@@ -52,16 +52,99 @@ export const experiencesData = [
     duration: { label: "Duration", className: "italic text-sm", value: { start: "Jan 2023", end: "Present" } },
     mode: { label: "Mode", className: "italic text-xs", value: "Remote and Hybrid" },
     location: { label: "Location", className: "italic text-xs", value: "Bangalore, Karnataka, India" },
-    description: { label: "Description", className: "list-disc pl-5 space-y-px text-sm ml-2",
+    description: {
+      label: "Description", className: "list-disc pl-5 space-y-px text-sm ml-2",
       value: [
-        <li key={1}>Architected and delivered a <span className="font-semibold">full-stack microservices simulation platform</span> serving 1,000+ active users and processing 200-500 REST API requests per day, built with React, Spring Boot, FastAPI, AWS S3, and PVC storage.</li>,
-        <li key={2}>Engineered a <span className="font-semibold">real-time 2D and 3D visualization engine</span> using WebGL and Three.js, reducing client-side render latency by 35% through bounding-box fitting and camera auto-framing optimizations.</li>,
-        <li key={3}>Implemented <span className="font-semibold">JWT-based authentication and role-based access control (RBAC)</span> with bcrypt password hashing, securing multi-tenant user data across all microservices.</li>,
-        <li key={4}>Developed scalable <span className="font-semibold">REST APIs</span> for distributed microservices using FastAPI and Spring Boot</li>,
-        <li key={5}>Built a <span className="font-semibold">responsive single-page application (SPA)</span> for cloud-native microservices platform with scalable UI architecture</li>,
-        <li key={6}>Optimized <span className="font-semibold">PostgreSQL database schemas and ORM-based migrations</span>, improving query execution performance by 40% through indexing strategies and efficient data-access patterns.</li>,
-        <li key={7}>Containerized and deployed cloud-native microservices using <span className="font-semibold">Docker and Podman on AWS</span>, with hands-on exposure to Kubernetes orchestration and GitOps-based CI/CD pipelines.</li>,
-        <li key={8}>Maintained high code quality through modular and scalable architecture by applying OOP and SOLID principles, and code review practices.</li>
+        {
+          label: "Platform Architecture & Visualization",
+          className: "",
+          sublabel: {
+            label: "Tech Stack",
+            className: "",
+            value: ["React", "WebGL", "Three.js", "Spring Boot", "FastAPI", "AWS S3", "PVC"]
+          },
+          value: [
+            <li key={1}>
+              Architected and delivered a <span className="font-semibold">full-stack microservices simulation platform</span> serving 1,000+ active users and processing 200–500 REST API requests per day.
+            </li>,
+            <li key={2}>
+              Engineered a <span className="font-semibold">real-time 2D and 3D visualization engine</span> using WebGL and Three.js, reducing client-side render latency by 35% through bounding-box fitting and camera auto-framing optimizations.
+            </li>,
+          ]
+        },
+        {
+          label: "Backend Development & Security",
+          className: "",
+          sublabel: {
+            label: "Tech Stack",
+            className: "",
+            value: ["Java", "Spring Boot", "FastAPI", "JWT", "RBAC", "bcrypt", "Keycloak"]
+          },
+          value: [
+            <li key={3}>
+              Implemented <span className="font-semibold">JWT-based authentication and role-based access control (RBAC)</span> with bcrypt password hashing, securing multi-tenant user data across all microservices.
+            </li>,
+            <li key={4}>
+              Developed scalable <span className="font-semibold">REST APIs</span> for distributed microservices using FastAPI and Spring Boot.
+            </li>,
+          ]
+        },
+        {
+          label: "Frontend & Application Development",
+          className: "",
+          sublabel: {
+            label: "Tech Stack",
+            className: "",
+            value: ["React", "SPA Architecture", "TypeScript", "REST Integration"]
+          },
+          value: [
+            <li key={5}>
+              Built a <span className="font-semibold">responsive single-page application (SPA)</span> for a cloud-native microservices platform with scalable UI architecture.
+            </li>,
+          ]
+        },
+        {
+          label: "Database Optimization",
+          className: "",
+          sublabel: {
+            label: "Tech Stack",
+            className: "",
+            value: ["PostgreSQL", "Hibernate", "ORM", "Indexing"]
+          },
+          value: [
+            <li key={6}>
+              Optimized <span className="font-semibold">PostgreSQL database schemas and ORM-based migrations</span>, improving query performance by 40% through indexing strategies and efficient data-access patterns.
+            </li>,
+          ]
+        },
+        {
+          label: "DevOps & Deployment",
+          className: "",
+          sublabel: {
+            label: "Tech Stack",
+            className: "",
+            value: ["Docker", "Podman", "AWS", "Kubernetes", "CI/CD", "GitOps"]
+          },
+          value: [
+            <li key={7}>
+              Containerized and deployed cloud-native microservices using <span className="font-semibold">Docker and Podman on AWS</span>, with exposure to Kubernetes orchestration and GitOps-based CI/CD pipelines.
+            </li>,
+          ]
+        },
+        {
+          label: "Code Quality & Design",
+          className: "",
+          sublabel: {
+            label: "Concepts",
+            className: "",
+            value: ["OOP", "SOLID Principles", "Code Reviews", "Modular Architecture"]
+          },
+          value: [
+            <li key={8}>
+              Maintained high code quality through modular architecture by applying OOP and SOLID principles along with structured code review practices.
+            </li>,
+          ]
+        }
       ]
     }
   }
@@ -74,11 +157,12 @@ export const projectsData = [
     live: { label: "Live URL", className: "font-medium", value: "https://3drr.betoo.co.in" },
     github: { label: "GitHub", className: "font-medium", value: "https://github.com/BittuKumar183040/3DRenderer" },
     date: { label: "Date", className: "text-xs italic", value: "March 2025" },
-    description: { label: "Description", className: "list-disc pl-5 space-y-px ml-2 text-sm",
+    description: {
+      label: "Description", className: "list-disc pl-5 space-y-px ml-2 text-sm",
       value: [
         <li key={1}>Designed and developed a <span className="font-semibold">browser-based 2D and 3D model visualization tool</span> using React, WebGL, and Three.js, supporting multiple mesh file formats.</li>,
         <li key={2}>Implemented advanced <span className="font-semibold">scene controls</span> including orbit controls, axis helpers, mesh isolation, and dynamic lighting for interactive model inspection.</li>,
-        ]
+      ]
     }
   },
   {
@@ -155,8 +239,8 @@ export const skillsData = [
 
 export const educationData = [
   {
-    degree: { label: "Degree", className: "text-sm font-medium", value: "Master of Computer Applications (MCA)"},
-    location: { label: "Location", className: "italic text-sm", value: "Bhopal, Madhya Pradesh, India"},
+    degree: { label: "Degree", className: "text-sm font-medium", value: "Master of Computer Applications (MCA)" },
+    location: { label: "Location", className: "italic text-sm", value: "Bhopal, Madhya Pradesh, India" },
     college: { label: "College", className: "font-medium text-xs", value: "Lakshmi Narain College of Technology (LNCT)" },
     duration: { label: "Duration", className: "italic text-xs", value: "2021 - 2023" }
   }
@@ -164,8 +248,8 @@ export const educationData = [
 
 export const certificationsData = [
   {
-    title:  { label: "Title",  className: "font-medium", value: "Full Stack Development Certification" },
-    year:   { label: "Year",   className: "italic",      value: "" },
-    issuer: { label: "Issuer", className: "",            value: "Mentorkart" }
+    title: { label: "Title", className: "font-medium", value: "Full Stack Development Certification" },
+    year: { label: "Year", className: "italic", value: "" },
+    issuer: { label: "Issuer", className: "", value: "Mentorkart" }
   }
 ]
