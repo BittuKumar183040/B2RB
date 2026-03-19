@@ -312,7 +312,7 @@ const Experience = ({ experiences, setExperiences }) => {
                     {experience.designation.value || `Experience ${index + 1}`}
                   </span>
                   {experience.company.value && (
-                    <span className="text-[10px] text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded-full shrink-0 truncate max-w-[80px]">
+                    <span className="text-[10px] text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded-full shrink-0 truncate">
                       {experience.company.value}
                     </span>
                   )}
@@ -345,7 +345,6 @@ const Experience = ({ experiences, setExperiences }) => {
                                 {sectionCount}
                               </span>
                             </div>
-
                             {isDescCollapsed ? <ChevronRight size={12} className="text-slate-400" /> : <ChevronDown size={12} className="text-slate-400" />}
                           </div>
                           {!isDescCollapsed && (
@@ -431,13 +430,13 @@ const Experience = ({ experiences, setExperiences }) => {
                               value={item.value.start}
                               placeholder="Start"
                               onChange={(e) => setDuration(index, "start", e.target.value)}
-                              className="input"
+                              className="border border-slate-200 rounded-lg w-full px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all placeholder:text-slate-300"
                             />
                             <input
                               value={item.value.end}
                               placeholder="End"
                               onChange={(e) => setDuration(index, "end", e.target.value)}
-                              className="input"
+                              className="border border-slate-200 rounded-lg w-full px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all placeholder:text-slate-300"
                             />
                           </div>
                         </div>
@@ -452,7 +451,7 @@ const Experience = ({ experiences, setExperiences }) => {
                           value={item.value}
                           onChange={(e) => setterOuterKeys(index, key, e.target.value)}
                           placeholder={`Enter ${item.label.toLowerCase()}…`}
-                          className="input"
+                          className="border border-slate-200 rounded-lg w-full px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all placeholder:text-slate-300"
                         />
                       </div>
                     )
