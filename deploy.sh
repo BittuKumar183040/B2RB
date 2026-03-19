@@ -4,6 +4,13 @@ set -e
 APP_NAME="b2rb-frontend"
 CONTAINER_NAME="b2rb-frontend-container"
 ENV_FILE=".env"
+FORCE=false
+
+while getopts "f" opt; do
+  case $opt in
+    f) FORCE=true ;;
+  esac
+done
 
 if [ -f "$ENV_FILE" ]; then
   export $(grep -v '^#' "$ENV_FILE" | xargs)
@@ -20,12 +27,12 @@ fi
 echo "▶ Fetching latest code..."
 git fetch origin
 
-if git diff --quiet HEAD origin/main; then
-  echo "✅ No changes. Skipping deploy."
+if git diff --quiet HEAD origin/main && [ "$FORCE" = false ]; then
+  echo "No changes. Skipping."
   exit 0
 fi
 
-echo "🚀 New changes detected. Pulling..."
+echo "🚀 Pulling latest code..."
 git pull origin main
 
 echo "▶ Getting git commit hash..."
