@@ -351,7 +351,7 @@ const Experience = ({ experiences, setExperiences }) => {
                             <div className="space-y-4">
                               {item.value.map((section, sectionIndex) => {
                                 return (
-                                  <div key={sectionIndex} className="border border-slate-200 rounded-lg p-2.5 bg-slate-50/50 space-y-2">
+                                  <div key={sectionIndex} className="relative border border-slate-200 rounded-lg p-2.5 bg-slate-50/50 space-y-2">
                                     <div className="flex items-center gap-1.5">
                                       <input
                                         value={section.label}
@@ -362,9 +362,9 @@ const Experience = ({ experiences, setExperiences }) => {
                                         onClick={() => removeSection(index, sectionIndex)}
                                         disabled={item.value.length === 1}
                                         title="Remove section"
-                                        className="text-slate-300 hover:text-red-400 transition-colors disabled:opacity-30 disabled:cursor-not-allowed shrink-0"
+                                        className=" absolute -right-2 -top-2 bg-slate-50 rounded border text-slate-300 hover:text-red-400 transition-colors disabled:opacity-30 disabled:cursor-not-allowed shrink-0"
                                       >
-                                        <X size={13} />
+                                        <X size={15} />
                                       </button>
                                     </div>
                                     {section.sublabel && (
