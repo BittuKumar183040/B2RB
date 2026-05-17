@@ -56,10 +56,10 @@ const Education = ({ education, setEducation }) => {
           return (
             <div
               key={index}
-              className="border border-slate-200 rounded-xl bg-white shadow-sm overflow-hidden"
+              className="border border-slate-200 rounded-xl bg-white shadow-sm"
             >
               <div
-                className="flex justify-between items-center px-3 py-2.5 cursor-pointer hover:bg-slate-50 transition-colors select-none"
+                className="relative flex justify-between items-center px-3 py-2.5 cursor-pointer hover:bg-slate-50 transition-colors select-none"
                 onClick={() => toggleCollapse(index)}
               >
                 <div className="flex items-center gap-2 flex-1 min-w-0">
@@ -77,9 +77,9 @@ const Education = ({ education, setEducation }) => {
                 </div>
                 <button
                   onClick={(e) => { e.stopPropagation(); removeEducation(index) }}
-                  className="text-slate-300 hover:text-red-400 transition-colors ml-2 shrink-0"
+                  className=" absolute -right-2 -top-2 bg-slate-50 rounded border text-slate-300 hover:text-red-400 transition-colors disabled:opacity-30 disabled:cursor-not-allowed shrink-0"
                 >
-                  <X size={14} />
+                  <X size={15} />
                 </button>
               </div>
 
